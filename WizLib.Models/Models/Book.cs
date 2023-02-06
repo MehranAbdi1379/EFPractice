@@ -19,9 +19,9 @@ public class Book
     public string ISBN { get; set; }
     [Required]
     public double Price { get; set; }
-    [ForeignKey("Category")]
-    public int Category_Id { get; set; }
-    public Category Category { get; set; }
+    [ForeignKey("BookDetail")]
+    public int BookDetail_Id { get; set; }
+    public BookDetail BookDetail{ get; set; }
 
     [NotMapped]
     public string PriceRange { get; set; }

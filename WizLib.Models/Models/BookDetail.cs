@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace WizLib.Models.Models;
 
-[Table("Categoria")]
-public class Category
+public class BookDetail
 {
     [Key]
-    public int Category_Id { get; set; }
+    public int BookDetail_Id { get; set; }
     [Required]
-    [MaxLength(255)]
-    [Column("NameOfTheColumn")]
-    public string Name { get; set; }
+    public int NumberOfChapters { get; set; }
+    public int NumberOfPages { get; set; }
+    public double Weight { get; set; }
+    public Book Book { get; set; }
 }
