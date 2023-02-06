@@ -22,6 +22,8 @@ public class Book
     [ForeignKey("BookDetail")]
     public int BookDetail_Id { get; set; }
     public BookDetail BookDetail{ get; set; }
+    public Publisher Publisher { get; set; }
+    public List<Author> Authors { get; set; }
 
     [NotMapped]
     public string PriceRange { get; set; }

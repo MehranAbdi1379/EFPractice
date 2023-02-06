@@ -18,6 +18,7 @@ public class Author
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }
     public string Location { get; set; }
+    public List<Book> Books { get; set; }
     [NotMapped]
     public string FullName
     {
