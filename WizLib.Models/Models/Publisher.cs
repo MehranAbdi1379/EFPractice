@@ -1,20 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WizLib.Models.Models;
 
-[Table("Categoria")]
-public class Category
+public class Publisher
 {
     [Key]
-    public int Category_Id { get; set; }
+    public int Publisher_Id { get; set; }
     [Required]
-    [MaxLength(255)]
-    [Column("NameOfTheColumn")]
     public string Name { get; set; }
+    [Required]
+    public string Location { get; set; }
 }

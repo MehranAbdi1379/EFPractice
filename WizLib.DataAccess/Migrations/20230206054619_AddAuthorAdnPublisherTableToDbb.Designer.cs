@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WizLib.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using WizLib.DataAccess.Data;
 namespace WizLib.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230206054619_AddAuthorAdnPublisherTableToDbb")]
+    partial class AddAuthorAdnPublisherTableToDbb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,9 +61,6 @@ namespace WizLib.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Book_Id"));
 
-                    b.Property<int>("Category_Id")
-                        .HasColumnType("int");
-
                     b.Property<string>("ISBN")
                         .IsRequired()
                         .HasMaxLength(15)
@@ -74,18 +74,16 @@ namespace WizLib.DataAccess.Migrations
 
                     b.HasKey("Book_Id");
 
-                    b.HasIndex("Category_Id");
-
                     b.ToTable("Books");
                 });
 
             modelBuilder.Entity("WizLib.Models.Models.Category", b =>
                 {
-                    b.Property<int>("Category_Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Category_Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -93,7 +91,7 @@ namespace WizLib.DataAccess.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasColumnName("NameOfTheColumn");
 
-                    b.HasKey("Category_Id");
+                    b.HasKey("Id");
 
                     b.ToTable("Categoria");
                 });
@@ -134,17 +132,6 @@ namespace WizLib.DataAccess.Migrations
                     b.HasKey("Publisher_Id");
 
                     b.ToTable("Publishers");
-                });
-
-            modelBuilder.Entity("WizLib.Models.Models.Book", b =>
-                {
-                    b.HasOne("WizLib.Models.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("Category_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
