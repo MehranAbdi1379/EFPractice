@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WizLib.DataAccess.Data;
 
@@ -11,9 +12,11 @@ using WizLib.DataAccess.Data;
 namespace WizLib.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230206114437_AddOneToOneFluentBookAndBookDetail")]
+    partial class AddOneToOneFluentBookAndBookDetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,9 +172,6 @@ namespace WizLib.DataAccess.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int>("Publisher_Id")
-                        .HasColumnType("int");
-
                     b.Property<int>("Title")
                         .HasColumnType("int");
 
@@ -179,8 +179,6 @@ namespace WizLib.DataAccess.Migrations
 
                     b.HasIndex("BookDetail_Id")
                         .IsUnique();
-
-                    b.HasIndex("Publisher_Id");
 
                     b.ToTable("Fluent_Books");
                 });
@@ -309,15 +307,7 @@ namespace WizLib.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WizLib.Models.Models.Fluent_Publisher", "Publisher")
-                        .WithMany("Books")
-                        .HasForeignKey("Publisher_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("BookDetail");
-
-                    b.Navigation("Publisher");
                 });
 
             modelBuilder.Entity("WizLib.Models.Models.BookDetail", b =>
@@ -330,11 +320,6 @@ namespace WizLib.DataAccess.Migrations
                 {
                     b.Navigation("Book")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("WizLib.Models.Models.Fluent_Publisher", b =>
-                {
-                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("WizLib.Models.Models.Publisher", b =>

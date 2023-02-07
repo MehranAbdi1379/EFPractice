@@ -36,6 +36,9 @@ public class ApplicationDbContext : DbContext
 		modelBuilder.Entity<Fluent_BookDetail>().HasKey(b => b.BookDetail_Id);
 		modelBuilder.Entity<Fluent_BookDetail>().Property(b => b.NumberOfChapters).IsRequired();
 
+		modelBuilder.Entity<Fluent_Book>().HasOne(b => b.BookDetail).WithOne(b => b.Book).HasForeignKey<Fluent_Book>("BookDetail_Id");
+		modelBuilder.Entity<Fluent_Book>().HasOne(b => b.Publisher).WithMany(b => b.Books).HasForeignKey(b => b.Publisher_Id);
+
 		modelBuilder.Entity<Fluent_Book>().HasKey(b => b.Book_Id);
 		modelBuilder.Entity<Fluent_Book>().Property(b => b.ISBN).IsRequired().HasMaxLength(15);
 		modelBuilder.Entity<Fluent_Book>().Property(b => b.Price).IsRequired();

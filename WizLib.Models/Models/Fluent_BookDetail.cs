@@ -14,4 +14,5 @@ public class Fluent_BookDetail
     public int NumberOfChapters { get; set; }
     public int NumberOfPages { get; set; }
     public double Weight { get; set; }
+    public Fluent_Book Book { get; set; }
 }
